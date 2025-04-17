@@ -31,7 +31,7 @@ Nous avons développé les features suivantes :
 **Prise en main du projet**
 
 ## Table des Matières
-- [P3-City Canvas](#p3-city-canvas)
+- [New-City Canvas](#p3-city-canvas)
 - [En détails](#en-détails)
 - [Commandes de Base](#commandes-de-base)
 - [Bonnes Pratiques](#bonnes-pratiques)
