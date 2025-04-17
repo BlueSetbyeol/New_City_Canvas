@@ -24,6 +24,16 @@
   border: 1px solid;
 }
 
+.search_alert {
+  color: var(--text-color);
+  text-align: center;
+}
+
+.search_alert-map {
+  color: var(--jet-color);
+  text-align: center;
+}
+
 .artSearch {
   height: 2.5em;
   min-width: 100%;
@@ -153,6 +163,9 @@
   .searchGeo-art {
     width: 49vw;
   }
+  .search_alert {
+    width: 10em;
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -190,5 +203,8 @@
   }
   .artSearch {
     width: 46em;
+  }
+  .search_alert {
+    width: 15em;
   }
 }
