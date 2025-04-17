@@ -2,19 +2,6 @@ import type { RequestHandler } from "express";
 
 import userRepository from "./userRepository";
 
-interface UserProps {
-  id: number | null;
-  pseudo: string;
-  email: string;
-  hashed_password: string;
-  inscription_date: string;
-  profile_picture: string;
-}
-
-interface UpdateUserProps extends Omit<UserProps, "id"> {
-  id: number;
-}
-
 const read: RequestHandler = async (req, res, next) => {
   try {
     const userId = Number(req.body.auth.id);
@@ -40,10 +27,16 @@ const add: RequestHandler = async (req, res, next) => {
       hashed_password: req.body.hashed_password,
       inscription_date: currentDate,
       profile_picture: req.body.image,
+      conditions_accepted: req.body.conditionsAccepted,
     };
 
     const insertId = await userRepository.create(newUser);
-    res.status(201).json({ insertId });
+
+    if (insertId) {
+      res.status(201).json({ insertId });
+    } else {
+      res.status(400);
+    }
   } catch (err) {
     next(err);
   }

@@ -17,7 +17,7 @@ function SignUp({ setIsRegistered }: SignUpProps) {
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [conditionAccepted, setConditionAccepted] = useState(false);
+  const [conditionsAccepted, setConditionsAccepted] = useState(false);
 
   const handlePasswordChange: ChangeEventHandler<HTMLInputElement> = (
     event,
@@ -52,7 +52,7 @@ function SignUp({ setIsRegistered }: SignUpProps) {
               pseudo: (pseudoRef.current as HTMLInputElement).value,
               email: (emailRef.current as HTMLInputElement).value,
               password,
-              conditionAccepted,
+              conditionsAccepted,
             }),
           },
         );
@@ -127,7 +127,7 @@ function SignUp({ setIsRegistered }: SignUpProps) {
             id="conditions-box"
             name="userConditions"
             value="accept"
-            onChange={() => setConditionAccepted(true)}
+            onChange={() => setConditionsAccepted(true)}
           />
           J'accepte
           <Link to="/StreetArtMap/TermsAndConditions" target="_blank">
@@ -145,7 +145,7 @@ function SignUp({ setIsRegistered }: SignUpProps) {
         className="submit-button"
         name="Send"
         value="S'inscrire"
-        disabled={!conditionAccepted}
+        disabled={!conditionsAccepted}
       />
     </form>
   );

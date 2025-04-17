@@ -8,7 +8,7 @@ interface UserProps {
   hashed_password: string;
   inscription_date: string;
   profile_picture: string;
-  // token: string; laissé pour semaine pro uniquement
+  conditions_accepted: boolean;
 }
 
 interface NewUserProps {
@@ -28,13 +28,14 @@ class UserRepository {
 
   async create(user: Omit<UserProps, "id">) {
     const [result] = await databaseClient.query<Result>(
-      "insert into user (email, hashed_password, pseudo, inscription_date, profile_picture) values (?, ?, ?, ?, ?)",
+      "insert into user (email, hashed_password, pseudo, inscription_date, profile_picture, conditions_accepted) values (?, ?, ?, ?, ?, ?)",
       [
         user.email,
         user.hashed_password,
         user.pseudo,
         user.inscription_date,
         user.profile_picture,
+        user.conditions_accepted,
       ],
     );
 
