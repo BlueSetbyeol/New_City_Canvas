@@ -84,6 +84,7 @@ export default function AddNewArtwork() {
             longitude,
             picture_credit,
             artist_name,
+            // user ...???
           }),
         },
       );
