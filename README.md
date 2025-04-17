@@ -1,4 +1,4 @@
-# P3-City Canvas
+# New-City Canvas
 `Street Art Hunter`
 
 **Bienvenue chez City Canvas : Street Art Hunter.**
