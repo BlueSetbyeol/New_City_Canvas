@@ -1,0 +1,71 @@
+/* Style du formulaire */
+.signup-form {
+  min-height: 80%;
+  min-width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.5s ease-out;
+  gap: 5px;
+}
+
+.signup {
+  height: 91%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mandatory {
+  color: var(--text-color);
+  font-size: 1.1em;
+}
+
+/* Bouton d'envoi présent dans la feuille de style SignIn*/
+
+.conditions {
+  gap: 10px;
+  color: var(--text-color);
+  font-size: 1.2em;
+}
+
+#conditions-box {
+  accent-color: var(--mustard-color);
+  margin-right: 10px;
+}
+
+.conditions a {
+  color: var(--text-color);
+  font-size: 1em;
+  margin: 0 3px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .signup-form {
+    min-height: 55%;
+  }
+  .signup {
+    height: 92%;
+  }
+}
+
+@media screen and (min-width: 1023px) {
+  .signup-form {
+    min-height: 55%;
+  }
+  .signup {
+    height: 89%;
+  }
+}
