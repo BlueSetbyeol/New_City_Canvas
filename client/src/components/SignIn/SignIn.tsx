@@ -50,7 +50,7 @@ function SignIn() {
         navigate("/StreetArtMap");
       } else {
         ToasterError(
-          "Aïe ! Un hic technique… mais pas de panique, réessaye ! 💻🔥",
+          "Aïe ! Une erreur de saisie s'est produite … mais pas de panique, réessaye ! 💻🔥",
           theme,
         );
         // Log des détails de la réponse en cas d'échec

@@ -31,7 +31,7 @@ function AuthPage() {
           {!isRegistered ? (
             <button
               type="button"
-              className="signin-btn"
+              className="sign-btn"
               onClick={() => setIsRegistered(true)}
             >
               J'ai déjà un compte
@@ -39,7 +39,7 @@ function AuthPage() {
           ) : (
             <button
               type="button"
-              className="signup-btn"
+              className="sign-btn"
               onClick={() => setIsRegistered(false)}
             >
               S'inscrire

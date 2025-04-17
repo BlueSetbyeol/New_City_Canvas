@@ -13,21 +13,19 @@
   gap: 2em;
 }
 
-.signup-btn,
-.signin-btn {
+.sign-btn {
   display: flex;
   border: 1px solid var(--text-color);
   font-family: var(--text-font);
   border-radius: 12px;
-  height: 2.5em;
-  width: 7.5em;
+  height: 3em;
+  width: 8.5em;
   justify-content: center;
   align-items: center;
   background-color: transparent;
   color: var(--text-color);
 }
-.signup-btn:hover,
-.signin-btn:hover {
+.sign-btn:hover {
   cursor: pointer;
 }
 
@@ -36,9 +34,7 @@
     padding: 7% 0% 3% 0%;
     width: 50vw;
   }
-  .signin-btn,
-  .signup-btn {
-    width: 8.5em;
+  .sign-btn {
     font-size: 1.2em;
   }
 }
@@ -47,9 +43,7 @@
     padding: 0;
     width: 45vw;
   }
-  .signin-btn,
-  .signup-btn {
-    width: 9em;
+  .sign-btn {
     font-size: 1.3em;
   }
 }
