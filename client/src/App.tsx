@@ -10,25 +10,23 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 function App() {
   return (
     <ThemeProvider>
-      <>
-        <nav>
-          <Link to="/" className="link-logo" aria-label="Retour à l'accueil">
-            <img src={Logo} alt="CityCanvas logo" className="logo" />
-          </Link>
-          <Navbar />
-        </nav>
-        <main>
-          <Outlet />
-          <ToastContainer theme="light" />
-          <ThemeToggle />
-        </main>
-        <div className="narrow-nav">
-          <Navbar />
-        </div>
-        <footer>
-          <Footer />
-        </footer>
-      </>
+      <nav>
+        <Link to="/" className="link-logo" aria-label="Retour à l'accueil">
+          <img src={Logo} alt="CityCanvas logo" className="logo" />
+        </Link>
+        <Navbar />
+      </nav>
+      <main>
+        <Outlet />
+        <ToastContainer theme="light" />
+        <ThemeToggle />
+      </main>
+      <div className="narrow-nav">
+        <Navbar />
+      </div>
+      <footer>
+        <Footer />
+      </footer>
     </ThemeProvider>
   );
 }

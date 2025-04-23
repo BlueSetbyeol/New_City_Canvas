@@ -24,3 +24,20 @@ geo-btn-map:hover {
   font-weight: 500;
   cursor: pointer;
 }
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .geo-btn {
+    font-size: 1.2em;
+  }
+  .geo-btn-map {
+    font-size: 1.2em;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .geo-btn {
+    font-size: 1.3em;
+  }
+  .geo-btn-map {
+    font-size: 1.3em;
+  }
+}

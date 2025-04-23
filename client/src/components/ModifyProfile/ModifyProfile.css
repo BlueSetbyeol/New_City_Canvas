@@ -1,0 +1,111 @@
+.popup-sct {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 998;
+  position: fixed;
+  background-color: var(--text-color);
+  width: 80%;
+  height: 70%;
+  border-radius: 12px;
+}
+
+.popup-closed {
+  display: none;
+}
+
+.close-btn {
+  height: 2.5em;
+  width: 5em;
+  font-family: var(--text-font);
+  font-size: 0.9em;
+  color: var(--form-color);
+  background-color: var(--text-color);
+  border-radius: 12px;
+  cursor: pointer;
+  border: solid .5px var(--form-color);
+  z-index: 999;
+  position: absolute;
+  right: 9vh;
+  top: 18vh;
+}
+
+.profile-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.user_label {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: center;
+  color: var(--form-color);
+}
+
+#profile-edit-pseudo,
+#profile-edit-mail {
+  height: 3em;
+  width: 20em;
+  padding: .5em;
+  margin: .5em;
+  border-radius: 12px;
+  font-family: var(--text-font);
+  background-color: var(--form-color);
+  text-align: left;
+  color: var(--button-color);
+  border-width: 0;
+  font-size: 14px;
+}
+.save-btn {
+  height: 2.5em;
+  width: 8em;
+  align-self: center;
+  font-family: var(--text-font);
+  background-color: var(--mustard-color);
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 2em;
+  border: solid .5px var(--jet-color);
+}
+.save-btn:hover,
+.close-btn:hover {
+  transition: all ease-in-out .25s;
+  scale: calc(1.02);
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .popup-sct {
+    margin-top: 1em;
+  }
+  .close-btn {
+    right: 16vh;
+  }
+  #profile-edit-pseudo,
+  #profile-edit-mail {
+    width: 384px;
+  }
+  .user_label {
+    text-align: start;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .popup-sct {
+    margin-top: 1em;
+  }
+  .close-btn {
+    right: 22vh;
+  }
+  #profile-edit-pseudo,
+  #profile-edit-mail {
+    width: 384px;
+  }
+  .user_label {
+    text-align: start;
+  }
+}

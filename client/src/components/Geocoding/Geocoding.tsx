@@ -6,8 +6,13 @@ import { useTheme } from "../../contexts/ThemeContext";
 import { ToasterError } from "../../services/ToasterFunctions";
 
 export default function Geocoding() {
-  const { setSubmitedAddress, getCoord, setSearchedLoc, searchedLoc } =
-    useContext(GeocodingContext);
+  const {
+    setSubmitedAddress,
+    submitedAddress,
+    getCoord,
+    setSearchedLoc,
+    searchedLoc,
+  } = useContext(GeocodingContext);
   const { theme } = useTheme();
 
   const navigate = useNavigate();
@@ -16,23 +21,25 @@ export default function Geocoding() {
   const location = useLocation();
 
   const handleSearchClick = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    setSearchedLoc(undefined);
-    // permet de récupérer les informations de localisation via le context qui utilise l'Api dans le serveur.
-    getCoord();
-    // gére les erreurs de saisie qui ont donné une erreur :
-    if (searchedLoc === undefined) {
-      if (location.pathname !== "/StreetArtMap/NewArtwork") {
-        navigate("/StreetArtMap/Error");
-      }
-      ToasterError(
-        "Hmm… on dirait que cette adresse fait du cache-cache. Réessaie ! 🏠❌",
-        theme,
-      );
-    } else {
-      // si le composant n'est pas sur la page d'ajout d'oeuvre alors navigate à la carte
-      if (location.pathname !== "/StreetArtMap/NewArtwork") {
-        navigate("/StreetArtMap");
+    if (submitedAddress && submitedAddress.length >= 3) {
+      e.preventDefault();
+      setSearchedLoc(undefined);
+      // permet de récupérer les informations de localisation via le context qui utilise l'Api dans le serveur.
+      getCoord();
+      // gére les erreurs de saisie qui ont donné une erreur :
+      if (searchedLoc === undefined) {
+        if (location.pathname !== "/StreetArtMap/NewArtwork") {
+          navigate("/StreetArtMap/Error");
+        }
+        ToasterError(
+          "Hmm… on dirait que cette adresse fait du cache-cache. Réessaie ! 🏠❌",
+          theme,
+        );
+      } else {
+        // si le composant n'est pas sur la page d'ajout d'oeuvre alors navigate à la carte
+        if (location.pathname !== "/StreetArtMap/NewArtwork") {
+          navigate("/StreetArtMap");
+        }
       }
     }
   };
@@ -84,14 +91,26 @@ export default function Geocoding() {
           }}
         />
       </section>
-      <button
-        className={buttonStyle}
-        type="submit"
-        onClick={handleSearchClick} //Confirmer l'envoi de l'adresse "submitedAddress" à l'API
-        onKeyDown={handleSearchClick}
-      >
-        Rechercher
-      </button>
+      {submitedAddress && submitedAddress.length < 3 ? (
+        <p
+          className={
+            location.pathname !== "/StreetArtMap"
+              ? "search_alert"
+              : "search_alert-map"
+          }
+        >
+          Nous avons besoin de plus d'informations pour te rediriger.
+        </p>
+      ) : (
+        <button
+          className={buttonStyle}
+          type="submit"
+          onClick={handleSearchClick} //Confirmer l'envoi de l'adresse "submitedAddress" à l'API
+          onKeyDown={handleSearchClick}
+        >
+          Rechercher
+        </button>
+      )}
     </div>
   );
 }
