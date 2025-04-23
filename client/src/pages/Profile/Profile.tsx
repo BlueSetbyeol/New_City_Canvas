@@ -14,13 +14,17 @@ interface UserProps {
   token: string;
 }
 
+interface artwork {
+  id: number;
+  name: string;
+  image: string;
+}
+
 function Profile() {
   const [infoUser, setInfoUser] = useState<UserProps | null>(null);
   const { user } = useContext(LoginContext);
   const [modifyPopUp, setModifyPopUp] = useState(false);
-  const [contribution, setContribution] = useState([]);
-
-  console.info(contribution);
+  const [contribution, setContribution] = useState<[artwork] | []>([]);
 
   // Fetch du profil en fonction de l'ID de l'utilisateur qui est connecté
   useEffect(() => {
@@ -107,14 +111,15 @@ function Profile() {
               setModifyPopUp={setModifyPopUp}
             />
             <h2>Tes contributions</h2>
-            {/* {contribution &&
-              contribution.length &&
-              contribution.map((artwork) => {
-                <>
-                  <img src={artwork.img} alt={artwork.name} />
-                  <p>{artwork.name}</p>
-                </>;
-              })} */}
+            <section className="list-of-contribution">
+              {contribution.length > 1 &&
+                contribution.map((artwork) => (
+                  <article className="contribution" key={artwork.id}>
+                    <img src={artwork.image} alt={artwork.name} />
+                    <p>{artwork.name}</p>
+                  </article>
+                ))}
+            </section>
           </>
         ) : (
           <article className="error_add">

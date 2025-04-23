@@ -60,35 +60,42 @@ export default function ModifyProfile({
         theme,
       );
     }
+    setModifyPopUp(false);
   };
   return (
-    <section className={modifyPopUp ? "popup-sct" : "popup-closed"}>
-      <button type="button" onClick={() => setModifyPopUp(false)}>
+    <>
+      <button
+        type="button"
+        className={modifyPopUp ? "close-btn" : "popup-closed"}
+        onClick={() => setModifyPopUp(false)}
+      >
         Close
       </button>
-      <form className="profile-detail" onSubmit={updateUserProfile}>
-        <label className="user_label">
-          Pseudo
-          <input
-            aria-label="modifie ton pseudo"
-            id="profile-edit-pseudo"
-            name="pseudo"
-            defaultValue={infoUser.pseudo}
-          />
-        </label>
-        <label className="user_label">
-          Mail
-          <input
-            aria-label="modifie ton adresse mail"
-            id="profile-edit-mail"
-            name="mail"
-            defaultValue={infoUser.email}
-          />
-        </label>
-        <button className="save-btn" type="submit">
-          Enregistrer
-        </button>
-      </form>
-    </section>
+      <section className={modifyPopUp ? "popup-sct" : "popup-closed"}>
+        <form className="profile-detail" onSubmit={updateUserProfile}>
+          <label className="user_label">
+            Pseudo
+            <input
+              aria-label="modifie ton pseudo"
+              id="profile-edit-pseudo"
+              name="pseudo"
+              defaultValue={infoUser.pseudo}
+            />
+          </label>
+          <label className="user_label">
+            Mail
+            <input
+              aria-label="modifie ton adresse mail"
+              id="profile-edit-mail"
+              name="mail"
+              defaultValue={infoUser.email}
+            />
+          </label>
+          <button className="save-btn" type="submit">
+            Enregistrer
+          </button>
+        </form>
+      </section>
+    </>
   );
 }
