@@ -22,6 +22,7 @@ router.post(
   artistsActions.add,
   artworkActions.add,
 );
+router.get("api/user/artworks/:id", artworkActions.readUser);
 
 router.post("/api/login", authActions.login);
 router.post("/api/users", authActions.hashPassword, userActions.add);

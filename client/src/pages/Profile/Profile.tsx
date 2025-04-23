@@ -2,15 +2,13 @@ import "./Profile.css";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/images/cc_logo_spotless_mustard.png";
+import ModifyProfile from "../../components/ModifyProfile/ModifyProfile";
 import LoginContext from "../../contexts/LoginContext";
-import { useTheme } from "../../contexts/ThemeContext";
-import { ToasterError, ToasterSuccess } from "../../services/ToasterFunctions";
 
 interface UserProps {
   id: number | null;
   pseudo: string;
   email: string;
-  hashed_password: string;
   inscription_date: string;
   profile_picture: string;
   token: string;
@@ -19,7 +17,10 @@ interface UserProps {
 function Profile() {
   const [infoUser, setInfoUser] = useState<UserProps | null>(null);
   const { user } = useContext(LoginContext);
-  const { theme } = useTheme();
+  const [modifyPopUp, setModifyPopUp] = useState(false);
+  const [contribution, setContribution] = useState([]);
+
+  console.info(contribution);
 
   // Fetch du profil en fonction de l'ID de l'utilisateur qui est connecté
   useEffect(() => {
@@ -43,46 +44,20 @@ function Profile() {
     }
   }, [user]);
 
-  // Édition de la page profil
-  const updateUserProfile = (event: {
-    preventDefault: () => void;
-    currentTarget: HTMLFormElement | undefined;
-  }) => {
-    event.preventDefault();
-    if (infoUser) {
-      const formData = new FormData(event.currentTarget);
-
-      const email = formData.get("mail") as string;
-      const pseudo = formData.get("pseudo") as string;
-
-      fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user?.token}`,
-        },
-        body: JSON.stringify({ email, pseudo }),
-      }).then((response) => {
-        if (response.status === 204) {
-          ToasterSuccess(
-            "Modifications réussies ! Tout est mis à jour, prêt(e) à explorer ! 😎✨",
-            theme,
-          );
-          response.json();
-        } else {
-          ToasterError(
-            "Oups, il y a eu un petit hic ! Un problème est survenu, réessaie un peu plus tard. 😬🔄",
-            theme,
-          );
+  //Récupération des oeuvres posté par l'user
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/user/artworks/${user?.user.id}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to update user's information'");
         }
-      });
-    } else {
-      ToasterError(
-        "Aïe ! Un imprévu est arrivé. Pas de panique, on va régler ça ! 🔧",
-        theme,
-      );
-    }
-  };
+        return response.json();
+      })
+      .then((data) => {
+        setContribution(data);
+      })
+      .catch((err) => console.error(err));
+  }, [user?.user.id]);
 
   return (
     <>
@@ -102,40 +77,50 @@ function Profile() {
                 infoUser?.profile_picture ||
                 "https://avatar.iran.liara.run/public"
               }
-              alt="avatar d'une fille"
+              alt="avatar aléatoire du profil"
             />
-            <form className="profile-detail" onSubmit={updateUserProfile}>
-              <label className="user_label">
-                Pseudo
-                <input
-                  aria-label="modifie ton pseudo"
-                  id="profile-edit-pseudo"
-                  name="pseudo"
-                  defaultValue={infoUser.pseudo}
-                />
-              </label>
-              <label className="user_label profile_label">
-                Mail
-                <input
-                  aria-label="modifie ton adresse mail"
-                  id="profile-edit-mail"
-                  name="mail"
-                  defaultValue={infoUser.email}
-                />
-              </label>
-              <div className="user_label profile_label">
-                Date d'inscription
-                <p id="profile-date">
+            <h2>Tes informations</h2>
+            <section className="user_profile">
+              <article className="user_infos">
+                <h3>Pseudo</h3>
+                <p aria-label="ton pseudo">{infoUser.pseudo}</p>
+                <h3>Mail</h3>
+                <p aria-label="ton adresse mail" className="profile-info">
+                  {infoUser.email}
+                </p>
+                <h3>Date d'inscription</h3>
+                <p aria-label="ta date d'inscription" className="profile-info">
                   {new Date(infoUser.inscription_date).toLocaleDateString()}
                 </p>
-              </div>
-              <button className="save-btn" type="submit">
-                Enregistrer
+              </article>
+              <button
+                className="modify-btn"
+                type="button"
+                onClick={() => setModifyPopUp(true)}
+              >
+                Modifier
               </button>
-            </form>
+            </section>
+            <ModifyProfile
+              infoUser={infoUser}
+              modifyPopUp={modifyPopUp}
+              setModifyPopUp={setModifyPopUp}
+            />
+            <h2>Tes contributions</h2>
+            {/* {contribution &&
+              contribution.length &&
+              contribution.map((artwork) => {
+                <>
+                  <img src={artwork.img} alt={artwork.name} />
+                  <p>{artwork.name}</p>
+                </>;
+              })} */}
           </>
         ) : (
-          <p>Chargement des données...</p>
+          <article className="error_add">
+            <h2>Oups ...</h2>
+            <h3>Peut être faudrait-il te reconnecter :)</h3>
+          </article>
         )}
       </section>
     </>
