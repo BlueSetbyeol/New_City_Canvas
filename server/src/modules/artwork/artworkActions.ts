@@ -29,7 +29,7 @@ const browse: RequestHandler = async (req, res, next) => {
       coordinate = [];
       i++;
     }
-    res.json(newArtworks).status(200); // status au lieu de sendStatus ...????
+    res.json(newArtworks).status(200);
   } catch (err) {
     next(err);
   }
@@ -40,7 +40,7 @@ const read: RequestHandler = async (req, res, next) => {
     const artworkId = Number(req.params.id);
     const artwork = await artworkRepository.read(artworkId);
     if (artwork == null) {
-      res.sendStatus(404);
+      res.sendStatus(503);
     } else {
       res.json(artwork);
     }
@@ -53,9 +53,8 @@ const readUser: RequestHandler = async (req, res, next) => {
   try {
     const userId = Number(req.params.id);
     const listArtworks = await artworkRepository.readUser(userId);
-    // console.log(listArtworks);
     if (listArtworks == null) {
-      res.sendStatus(404);
+      res.sendStatus(503);
     } else {
       res.json(listArtworks);
     }

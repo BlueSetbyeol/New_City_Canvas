@@ -1,14 +1,21 @@
-.profile-sct {
+.profile-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 10em;
   width: 80%;
-  overflow-y: auto;
+  height: 100%;
 }
-.profile-sct img {
+.profile-page img {
   width: 100px;
   height: auto;
+}
+.profile-sct {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: auto;
 }
 .user_profile {
   display: flex;
@@ -45,9 +52,13 @@
   scale: calc(1.02);
 }
 .list-of-contribution {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: end;
+  justify-content: space-evenly;
+  gap: 5px;
 }
 .list-of-contribution p {
   color: var(--text-color);
@@ -57,15 +68,21 @@
   flex-direction: column;
   justify-content: left;
 }
-
+.contribution img {
+  min-height: 15em;
+  width: 20em;
+}
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  .profile-sct {
+  .profile-page {
     width: 65vw;
     padding-top: 2em;
   }
-  .profile-sct img {
+  .profile-page img {
     width: 125px;
     height: auto;
+  }
+  .profile-sct {
+    width: 100%;
   }
   .user_profile {
     flex-direction: column;
@@ -87,16 +104,23 @@
     justify-self: baseline;
     margin-left: 0.5em;
   }
+  .contribution img {
+    height: 15em;
+    width: auto;
+  }
 }
 
 @media screen and (min-width: 1024px) {
-  .profile-sct {
+  .profile-page {
     width: 65vw;
     padding-top: 1em;
   }
-  .profile-sct img {
+  .profile-page img {
     width: 125px;
     height: auto;
+  }
+  .profile-sct {
+    width: 120%;
   }
   .user_profile {
     flex-direction: row;
@@ -108,5 +132,9 @@
     grid-template-columns: 1fr 1fr;
     width: 34em;
     align-items: baseline;
+  }
+  .contribution img {
+    height: 15em;
+    width: auto;
   }
 }

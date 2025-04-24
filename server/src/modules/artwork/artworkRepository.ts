@@ -38,6 +38,7 @@ class artworkRepository {
       "SELECT * from artwork where id_user=?",
       [id],
     );
+    return rows as artwork[];
   }
 
   async create(artwork: Omit<artwork, "id">) {
