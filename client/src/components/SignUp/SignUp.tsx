@@ -31,14 +31,22 @@ function SignUp({ setIsRegistered }: SignUpProps) {
     setConfirmPassword(event.target.value);
   };
 
+  const handleChangedCondition = () => {
+    if (conditionsAccepted) {
+      setConditionsAccepted(false);
+    } else {
+      setConditionsAccepted(true);
+    }
+  };
+
   const handleSubmit: FormEventHandler = async (event) => {
     event.preventDefault();
 
     if (
-      password.length >= 5 &&
+      password.length >= 8 &&
       password === confirmPassword &&
       pseudoRef.current &&
-      pseudoRef.current.value.length >= 8 &&
+      pseudoRef.current.value.length >= 5 &&
       emailRef.current &&
       emailRef.current.value !== ""
     ) {
@@ -127,7 +135,7 @@ function SignUp({ setIsRegistered }: SignUpProps) {
             id="conditions-box"
             name="userConditions"
             value="accept"
-            onChange={() => setConditionsAccepted(true)}
+            onChange={handleChangedCondition}
           />
           J'accepte
           <Link to="/StreetArtMap/TermsAndConditions" target="_blank">

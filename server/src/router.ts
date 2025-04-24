@@ -16,6 +16,7 @@ router.get("/api/geolocalisation", nominatimActions.geocode);
 
 router.get("/api/artworks", artworkActions.browse);
 router.get("/api/artwork/:id", artworkActions.read);
+router.get("/api/user-artworks/:id", artworkActions.readUser);
 router.post(
   "/api/artwork",
   authActions.verifyToken,

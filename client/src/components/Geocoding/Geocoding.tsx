@@ -91,7 +91,7 @@ export default function Geocoding() {
           }}
         />
       </section>
-      {submitedAddress && submitedAddress.length < 3 ? (
+      {!submitedAddress || submitedAddress.length < 3 ? (
         <p
           className={
             location.pathname !== "/StreetArtMap"
@@ -99,7 +99,7 @@ export default function Geocoding() {
               : "search_alert-map"
           }
         >
-          Nous avons besoin de plus d'informations pour te rediriger.
+          Entre une destination, le StreetArt t'attends !
         </p>
       ) : (
         <button

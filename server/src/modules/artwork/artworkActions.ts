@@ -29,7 +29,7 @@ const browse: RequestHandler = async (req, res, next) => {
       coordinate = [];
       i++;
     }
-    res.json(newArtworks).sendStatus(200);
+    res.json(newArtworks).status(200);
   } catch (err) {
     next(err);
   }
@@ -40,9 +40,23 @@ const read: RequestHandler = async (req, res, next) => {
     const artworkId = Number(req.params.id);
     const artwork = await artworkRepository.read(artworkId);
     if (artwork == null) {
-      res.sendStatus(404);
+      res.sendStatus(503);
     } else {
       res.json(artwork);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const readUser: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = Number(req.params.id);
+    const listArtworks = await artworkRepository.readUser(userId);
+    if (listArtworks == null) {
+      res.sendStatus(503);
+    } else {
+      res.json(listArtworks);
     }
   } catch (err) {
     next(err);
@@ -61,6 +75,7 @@ const add: RequestHandler = async (req, res, next) => {
       longitude: Number.parseFloat(req.body.longitude),
       picture_credit: String(req.body.picture_credit),
       id_artist: Number(req.body.id_artist),
+      id_user: Number(req.body.id_user),
     };
 
     if (
@@ -84,4 +99,4 @@ const add: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, add };
+export default { browse, read, add, readUser };

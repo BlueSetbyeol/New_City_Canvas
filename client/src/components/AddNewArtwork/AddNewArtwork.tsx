@@ -41,6 +41,7 @@ export default function AddNewArtwork() {
       const latitude = formData.get("latitude") as string;
       const longitude = formData.get("longitude") as string;
       const picture_credit = formData.get("picture_credit") as string;
+      const id_user = user?.user.id as number;
 
       //gestion des erreurs de saisie sur l'import d'une nouvelle oeuvre
       if (
@@ -84,6 +85,7 @@ export default function AddNewArtwork() {
             longitude,
             picture_credit,
             artist_name,
+            id_user,
           }),
         },
       );
@@ -116,7 +118,7 @@ export default function AddNewArtwork() {
       </label>
       <label>
         Nom de l'artiste :
-        <input name="artiste_name" type="text" className="addArt" />
+        <input name="artist_name" type="text" className="addArt" />
       </label>
       <label>
         Adresse de l'oeuvre (approximativement):

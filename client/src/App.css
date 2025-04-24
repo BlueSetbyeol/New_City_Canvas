@@ -42,7 +42,8 @@
 }
 
 #root {
-  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
   background-color: var(--bg-color);
 }
 
@@ -73,7 +74,7 @@ body {
   font-size: var(--main-text-size);
   line-height: 1.7;
   color: var(--text-color);
-  margin: 0;
+  /* margin: 0; */
 }
 
 h1,
@@ -129,13 +130,10 @@ main {
 }
 
 .narrow-nav {
-  display: flex;
+  height: 8vh;
   width: 100%;
+  display: flex;
   justify-content: center;
-}
-
-.logout-btn {
-  color: var(--text-color);
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
