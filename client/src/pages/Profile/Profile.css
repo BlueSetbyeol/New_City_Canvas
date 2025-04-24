@@ -30,11 +30,9 @@
   color: var(--text-color);
 }
 .user_infos p {
-  height: 3em;
   font-family: var(--text-font);
   color: var(--button-color);
 }
-
 .modify-btn {
   height: 2.5em;
   width: 8em;
@@ -67,6 +65,7 @@
   display: flex;
   flex-direction: column;
   justify-content: left;
+  text-decoration: none;
 }
 .contribution img {
   min-height: 15em;

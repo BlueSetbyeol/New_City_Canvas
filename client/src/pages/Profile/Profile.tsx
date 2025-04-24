@@ -83,8 +83,8 @@ function Profile() {
               }
               alt="avatar aléatoire du profil"
             />
-            <h2>Tes informations</h2>
             <section className="profile-sct">
+              <h2>Tes informations</h2>
               <article className="user_profile">
                 <article className="user_infos">
                   <h3>Pseudo</h3>
@@ -118,10 +118,14 @@ function Profile() {
               <article className="list-of-contribution">
                 {contribution.length > 1 ? (
                   contribution.map((artwork) => (
-                    <article className="contribution" key={artwork.id}>
+                    <Link
+                      to={`/StreetArtMap/${artwork.id}`}
+                      key={artwork.id}
+                      className="contribution"
+                    >
                       <img src={artwork.image} alt={artwork.name} />
                       <p>{artwork.name}</p>
-                    </article>
+                    </Link>
                   ))
                 ) : (
                   <p>Ajoute ta première oeuvre !</p>
