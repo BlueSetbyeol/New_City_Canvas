@@ -49,6 +49,9 @@
   flex-direction: column;
   align-items: center;
 }
+.list-of-contribution p {
+  color: var(--text-color);
+}
 .contribution {
   display: flex;
   flex-direction: column;

@@ -112,13 +112,16 @@ function Profile() {
             />
             <h2>Tes contributions</h2>
             <section className="list-of-contribution">
-              {contribution.length > 1 &&
+              {contribution.length > 1 ? (
                 contribution.map((artwork) => (
                   <article className="contribution" key={artwork.id}>
                     <img src={artwork.image} alt={artwork.name} />
                     <p>{artwork.name}</p>
                   </article>
-                ))}
+                ))
+              ) : (
+                <p>Ajoute ta première oeuvre !</p>
+              )}
             </section>
           </>
         ) : (

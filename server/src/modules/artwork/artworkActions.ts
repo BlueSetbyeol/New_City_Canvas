@@ -29,7 +29,7 @@ const browse: RequestHandler = async (req, res, next) => {
       coordinate = [];
       i++;
     }
-    res.json(newArtworks).sendStatus(200);
+    res.json(newArtworks).status(200); // status au lieu de sendStatus ...????
   } catch (err) {
     next(err);
   }
@@ -53,6 +53,7 @@ const readUser: RequestHandler = async (req, res, next) => {
   try {
     const userId = Number(req.params.id);
     const listArtworks = await artworkRepository.readUser(userId);
+    // console.log(listArtworks);
     if (listArtworks == null) {
       res.sendStatus(404);
     } else {
