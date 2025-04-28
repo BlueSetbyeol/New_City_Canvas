@@ -45,8 +45,14 @@ export default function AddNewArtwork() {
     try {
       const formData = new FormData(event.currentTarget);
 
+      let artist_name = "";
+      if (selectedArtist === "other") {
+        artist_name = formData.get("artist_name") as string;
+      } else {
+        artist_name = selectedArtist;
+      }
+
       const name = formData.get("name") as string;
-      const artist_name = formData.get("artist_name") as string;
       const address = formData.get("address") as string;
       const image = formData.get("image") as string;
       const picture_date = formData.get("picture_date") as string;
@@ -150,7 +156,7 @@ export default function AddNewArtwork() {
       <label>
         Nom de l'artiste :
         <select
-          name="artist_name"
+          name="known_artist_name"
           onChange={(event) => {
             setSelectedArtist(event.target.value);
           }}
