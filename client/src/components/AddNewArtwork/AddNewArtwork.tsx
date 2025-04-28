@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AddNewArtwork.css";
 import GeocodingContext from "../../contexts/GeocodingContext";
@@ -12,8 +12,21 @@ import {
 import Geocoding from "../Geocoding/Geocoding";
 import Geolocalisation from "../Geolocalisation/Geolocalisation";
 
+interface artist {
+  id: number;
+  name: string;
+}
+
 export default function AddNewArtwork() {
   const [selectedType, setSelectedType] = useState("");
+  const [selectedArtist, setSelectedArtist] = useState("");
+  const [listArtist, setListArtist] = useState<artist[]>([]);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/artists`)
+      .then((res) => res.json())
+      .then((data) => setListArtist(data));
+  }, []);
 
   //Récupérer les informations contenus dans les contexts = geo et user
   const { submitedAddress, searchedLoc } = useContext(GeocodingContext);
@@ -43,11 +56,24 @@ export default function AddNewArtwork() {
       const picture_credit = formData.get("picture_credit") as string;
       const id_user = user?.user.id as number;
 
+      function checkURL(url: string) {
+        if (typeof url !== "string") return false;
+        return url.match(/\.(jpg|jpeg|gif|png)$/) != null;
+      } //verification of extension
+
+      //gestion des erreurs de saisie sur l'import d'une nouvelle oeuvre
+      if (image.length < 20 || checkURL(image) === false) {
+        ToasterWarning(
+          "Oups ! L'image n'est pas bonne, tu en as peut-être une autre ? 😬✍️",
+          theme,
+        );
+        return Error;
+      }
+
       //gestion des erreurs de saisie sur l'import d'une nouvelle oeuvre
       if (
         name.length < 4 ||
         address.length < 4 ||
-        image.length < 15 ||
         latitude === null ||
         longitude === null ||
         picture_credit === null
@@ -114,14 +140,50 @@ export default function AddNewArtwork() {
     <form action="add" className="artworkForm" onSubmit={handleSubmit}>
       <label>
         Nom de l'oeuvre trouvé :
-        <input name="name" type="text" className="addArt" />
+        <input
+          name="name"
+          type="text"
+          className="addArt"
+          placeholder="4 caractères minimum"
+        />
       </label>
       <label>
         Nom de l'artiste :
-        <input name="artist_name" type="text" className="addArt" />
+        <select
+          name="artist_name"
+          onChange={(event) => {
+            setSelectedArtist(event.target.value);
+          }}
+          className="addType"
+          value={selectedArtist}
+        >
+          <option value="" key="option">
+            Choisissez le nom de l'artiste
+          </option>
+          {listArtist.length > 0 &&
+            listArtist.map((artist) => (
+              <option
+                value={artist.name ? artist.name : "inconnu"}
+                key={artist.id}
+              >
+                {artist.name}
+              </option>
+            ))}
+          <option value="other" key="not_registered">
+            Autre
+          </option>
+        </select>
+        {selectedArtist === "other" && (
+          <input
+            name="artist_name"
+            type="text"
+            className="addArt"
+            placeholder="Précise le nom uniquement si tu le connais"
+          />
+        )}
       </label>
       <label>
-        Adresse de l'oeuvre (approximativement):
+        Adresse de l'oeuvre (approximative mais obligatoire):
         <Geocoding />
         <input
           className="addArt"
@@ -131,6 +193,7 @@ export default function AddNewArtwork() {
           hidden
           defaultValue={submitedAddress}
           aria-label="ajouter une nouvelle oeuvre"
+          placeholder="4 caractères minimum"
         />
         <div>
           {searchedLoc !== undefined && (
@@ -156,7 +219,12 @@ export default function AddNewArtwork() {
       </label>
       <label>
         Photo de l'oeuvre :
-        <input name="image" type="url" className="addArt" />
+        <input
+          name="image"
+          type="url"
+          className="addArt"
+          placeholder="url de l'image en .jpg, .jpeg, .gif ou .png"
+        />
       </label>
       <label>
         Date de la prise :

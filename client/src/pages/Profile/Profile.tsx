@@ -24,7 +24,7 @@ function Profile() {
   const [infoUser, setInfoUser] = useState<UserProps | null>(null);
   const { user } = useContext(LoginContext);
   const [modifyPopUp, setModifyPopUp] = useState(false);
-  const [contribution, setContribution] = useState<[artwork] | []>([]);
+  const [contribution, setContribution] = useState<artwork[]>([]);
 
   // Fetch du profil en fonction de l'ID de l'utilisateur qui est connecté
   useEffect(() => {
@@ -116,7 +116,7 @@ function Profile() {
               />
               <h2>Tes contributions</h2>
               <article className="list-of-contribution">
-                {contribution.length > 1 ? (
+                {contribution.length > 0 ? (
                   contribution.map((artwork) => (
                     <Link
                       to={`/StreetArtMap/${artwork.id}`}

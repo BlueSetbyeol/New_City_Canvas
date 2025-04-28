@@ -67,6 +67,10 @@ function SignIn() {
       <label htmlFor="email" className="form-label">
         Email
         <input ref={emailRef} type="email" id="email" className="form-input" />
+        {/* at the moment the verification is only about the @,
+        possibility to also check if the value includes a string, a . and then a string or to use a RegEx
+        or again an extension to verify that the address do exist
+        BEST TO DO : do it in the back end so it is really secure*/}
       </label>
       <label htmlFor="password" className="form-label">
         Password
