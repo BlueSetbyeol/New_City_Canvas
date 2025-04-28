@@ -14,6 +14,16 @@
   z-index: 1000;
 }
 
+.icon-theme {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+}
+
+.theme-button:hover .icon-theme {
+  transform: scale(1.1);
+}
+
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .theme-button {
     top: auto;
@@ -30,14 +40,4 @@
     right: 20px;
     left: auto;
   }
-}
-
-.icon-theme {
-  width: 30px;
-  height: 30px;
-  transition: transform 0.3s ease;
-}
-
-.theme-button:hover .icon-theme {
-  transform: scale(1.1);
 }

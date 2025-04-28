@@ -29,7 +29,7 @@ const browse: RequestHandler = async (req, res, next) => {
       coordinate = [];
       i++;
     }
-    res.json(newArtworks).sendStatus(200);
+    res.json(newArtworks).status(200);
   } catch (err) {
     next(err);
   }
@@ -40,7 +40,7 @@ const read: RequestHandler = async (req, res, next) => {
     const artworkId = Number(req.params.id);
     const artwork = await artworkRepository.read(artworkId);
     if (artwork == null) {
-      res.sendStatus(404);
+      res.status(503);
     } else {
       res.json(artwork);
     }
@@ -54,7 +54,7 @@ const readUser: RequestHandler = async (req, res, next) => {
     const userId = Number(req.params.id);
     const listArtworks = await artworkRepository.readUser(userId);
     if (listArtworks == null) {
-      res.sendStatus(404);
+      res.status(503);
     } else {
       res.json(listArtworks);
     }
@@ -78,9 +78,15 @@ const add: RequestHandler = async (req, res, next) => {
       id_user: Number(req.body.id_user),
     };
 
+    // expression régulière pour vérifier que le lien donné est bien une image et non un lien dangereux.
+    function checkURL(url: string) {
+      if (typeof url !== "string") return false;
+      return url.match(/\.(jpg|jpeg|gif|png)$/) != null;
+    }
+
     if (
       newArtworks.address === null ||
-      newArtworks.image === null ||
+      checkURL(newArtworks.image) === false ||
       newArtworks.latitude === null ||
       newArtworks.longitude === null ||
       newArtworks.picture_credit === null

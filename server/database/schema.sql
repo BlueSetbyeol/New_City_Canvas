@@ -1,11 +1,11 @@
  CREATE TABLE artist
- (id INT AUTO_INCREMENT PRIMARY KEY,
- name VARCHAR(100) DEFAULT 'inconnu'
+ (id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+ name VARCHAR(100) NOT NULL
  );
  
  INSERT INTO artist (id,name)
 	VALUES 
-    (1, null),
+    (1,"Inconnu"),
     (2,"Kalouf (Blast)"),
     (3,"Soly"),
     (4,"C4pie"),

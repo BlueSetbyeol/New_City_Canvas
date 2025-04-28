@@ -46,7 +46,6 @@ export default function ModifyProfile({
             "Modifications réussies ! Tout est mis à jour, prêt(e) à explorer ! 😎✨",
             theme,
           );
-          response.json();
         } else {
           ToasterError(
             "Oups, il y a eu un petit hic ! Un problème est survenu, réessaie un peu plus tard. 😬🔄",

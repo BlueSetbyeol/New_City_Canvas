@@ -145,6 +145,7 @@
     align-self: center;
     margin-left: 2em;
     border: solid .5px var(--jet-color);
+    width: 10em;
   }
   .searchGeo {
     display: flex;
@@ -158,13 +159,10 @@
   }
   .searchBar-art {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
   }
   .searchGeo-art {
     width: 49vw;
-  }
-  .search_alert {
-    width: 10em;
   }
 }
 
@@ -181,14 +179,15 @@
   .searchBar-art {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
   .search-btn {
     background-color: var(--button-yellow);
     border: solid .5px var(--jet-color);
     color: var(--jet-color);
     align-self: baseline;
-    margin: 0 2em;
+    margin: 0 20px;
+    width: 150px;
   }
   .searchGeo {
     display: flex;
@@ -202,9 +201,10 @@
     margin-bottom: 0;
   }
   .artSearch {
-    width: 46em;
+    width: 42em;
   }
   .search_alert {
-    width: 15em;
+    width: 150px;
+    margin: 0 20px;
   }
 }
