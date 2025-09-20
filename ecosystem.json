@@ -1,0 +1,19 @@
+{
+  "apps": [
+    {
+      "name": "new-city-canvas",
+      "script": "npm start"
+    }
+  ],
+
+  "deploy": {
+    "production": {
+      "user": "root",
+      "host": "217.154.121.53",
+      "ref": "origin/main",
+      "repo": "git@github.com:BlueSetbyeol/New_City_Canvas.git",
+      "path": "/root/deploy/new-city-canvas",
+      "post-deploy": "npm install && npm run build && pm2 startOrRestart ecosystem.json"
+    }
+  }
+}
