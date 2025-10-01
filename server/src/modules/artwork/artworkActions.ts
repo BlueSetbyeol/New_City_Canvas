@@ -63,6 +63,14 @@ const readUser: RequestHandler = async (req, res, next) => {
   }
 };
 
+// expression régulière pour vérifier que le lien donné est bien une image et non un lien dangereux.
+function checkURL(url: string) {
+  if (typeof url !== "string") {
+    return false;
+  }
+  return url.match(/\.(jpg|jpeg|gif|png)$/) != null;
+}
+
 const add: RequestHandler = async (req, res, next) => {
   try {
     const newArtworks = {
@@ -77,12 +85,6 @@ const add: RequestHandler = async (req, res, next) => {
       id_artist: Number(req.body.id_artist),
       id_user: Number(req.body.id_user),
     };
-
-    // expression régulière pour vérifier que le lien donné est bien une image et non un lien dangereux.
-    function checkURL(url: string) {
-      if (typeof url !== "string") return false;
-      return url.match(/\.(jpg|jpeg|gif|png)$/) != null;
-    }
 
     if (
       newArtworks.address === null ||
