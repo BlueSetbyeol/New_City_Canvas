@@ -32,11 +32,10 @@ const login: RequestHandler = async (req, res, next) => {
     // Vérification du mot de passe avec argon2
     const verified = await argon2.verify(
       user.hashed_password,
-      req.body.password,
+      req.body.password
     );
 
     if (verified) {
-      // Suppression du mot de passe haché avant de renvoyer la réponse
       const { hashed_password, ...userWithoutHashedPassword } = user;
       //ajout d'un token pour l'identification de l'utilisateur
       const myPayload: MyPayload = {
@@ -49,7 +48,7 @@ const login: RequestHandler = async (req, res, next) => {
         process.env.APP_SECRET as string,
         {
           expiresIn: "1h",
-        },
+        }
       );
 
       res.json({
@@ -115,7 +114,7 @@ const verifyToken: RequestHandler = (req, res, next) => {
     // En cas de succès, le payload est extrait et décodé
     req.body.auth = jwt.verify(
       token,
-      process.env.APP_SECRET as string,
+      process.env.APP_SECRET as string
     ) as MyPayload;
 
     next();

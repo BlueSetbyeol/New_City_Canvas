@@ -30,6 +30,11 @@ const geocode: RequestHandler = async (req, res, next) => {
   try {
     const searchResponse: AxiosResponse = await client.get(
       `/search?${queryString}`,
+      {
+        headers: {
+          "User-Agent": "City canvas",
+        },
+      },
     );
 
     // important : il faut bien garder le /search? à ce niveau d'AxiosResponse et non dans la const client ou la queryString.
