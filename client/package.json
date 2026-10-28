@@ -1,5 +1,5 @@
 {
-  "name": "@js-monorepo/client",
+  "name": "new_city_canvas",
   "type": "module",
   "scripts": {
     "check-types": "tsc --noEmit",

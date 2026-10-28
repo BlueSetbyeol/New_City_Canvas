@@ -4,6 +4,7 @@ import type { RequestHandler } from "express";
 const client = axios.create({
   baseURL: "https://nominatim.openstreetmap.org",
 });
+// https://nominatim.openstreetmap.org/search?q=lyon&format=json
 
 type geolocData = {
   place_id: number;
@@ -27,13 +28,20 @@ const geocode: RequestHandler = async (req, res, next) => {
 
   //utilisation d'Axios pour faire une requête vers une API exterieur
   const queryString: string = `q=${submitedAddress}&format=json`;
+  console.log(queryString);
   try {
     const searchResponse: AxiosResponse = await client.get(
       `/search?${queryString}`,
+      {
+        headers: {
+          "User-Agent": "City canvas",
+        },
+      },
     );
 
     // important : il faut bien garder le /search? à ce niveau d'AxiosResponse et non dans la const client ou la queryString.
     const geocodedData: geolocData[] = searchResponse.data;
+    console.log(geocodedData);
 
     // transmition via Express des infos recueilli par Axios.
 
